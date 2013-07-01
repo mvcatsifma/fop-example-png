@@ -1,0 +1,11 @@
+apply plugin: "java"
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile group: 'org.apache.xmlgraphics', name: 'fop', version: '1.1'
+  compile group: 'org.apache.avalon.framework', name: 'avalon-framework-api', version: '4.3.1'
+  compile group: 'org.apache.avalon.framework', name: 'avalon-framework-impl', version: '4.3.1'
+}
