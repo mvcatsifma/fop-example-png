@@ -17,12 +17,12 @@ import javax.xml.transform.stream.StreamSource;
 
 public class FopTest {
 
+    static final int SPRINT_NR = 21;
     static FopFactory fopFactory = FopFactory.newInstance();
     final OutputStream out;
 
     public FopTest() throws Exception {
         File file = new File("build/out.png");
-        file.createNewFile();
         out = new BufferedOutputStream(new FileOutputStream(file));
     }
 
@@ -32,13 +32,15 @@ public class FopTest {
     }
 
     private void run() throws Exception {
-        try{
+        try {
             Fop fop = fopFactory.newFop(MimeConstants.MIME_PNG, out);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
+            Source xslt = new StreamSource(new File("src/main/resources/release_report.xsl"));
+            Transformer transformer = transformerFactory.newTransformer(xslt);
+            transformer.setParameter("sprint", SPRINT_NR);
 
-            Source source = new StreamSource(new File("src/main/resources/in.xml"));
+            Source source = new StreamSource(new File("src/main/resources/issues.xml"));
             Result target = new SAXResult(fop.getDefaultHandler());
 
             transformer.transform(source, target);
