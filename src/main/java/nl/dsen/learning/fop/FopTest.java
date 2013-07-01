@@ -21,7 +21,7 @@ public class FopTest {
     final OutputStream out;
 
     public FopTest() throws Exception {
-        File file = new File("build/out.pdf");
+        File file = new File("build/out.png");
         file.createNewFile();
         out = new BufferedOutputStream(new FileOutputStream(file));
     }
@@ -33,7 +33,7 @@ public class FopTest {
 
     private void run() throws Exception {
         try{
-            Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, out);
+            Fop fop = fopFactory.newFop(MimeConstants.MIME_PNG, out);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
